@@ -25,7 +25,7 @@ openssl x509 -in /tmp/client-identity.pem -text -noout
 echo "SSL Root Certificate Path: $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_SSLROOTCERT"
 
 # Check the SSL connection to the database
-#openssl s_client -connect $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_HOST:$NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_PORT -CAfile $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_SSLROOTCERT
+openssl s_client -connect $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_HOST:$NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_PORT -CAfile $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_SSLROOTCERT
 
 # Verify the certificates
 openssl verify -CAfile $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_SSLROOTCERT /tmp/client-identity.pem
@@ -56,13 +56,6 @@ export DATABASE_URL="postgresql://$NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BE
 # Debug statement to print the DATABASE_URL
 echo "DATABASE_URL: $DATABASE_URL"
 
-# Test connection to the database using Prisma
-echo "Attempting to push Prisma schema to the database..."
-PRISMA_OUTPUT=$(npx prisma db push 2>&1)
-PRISMA_EXIT_CODE=$?
-
-# Log the output of the Prisma command
-echo "$PRISMA_OUTPUT" >> /tmp/prisma_output.log
 
 if [ $PRISMA_EXIT_CODE -ne 0 ]; then
   echo "Failed to connect to the database. See /tmp/prisma_output.log for details." >> /tmp/run_error.log
