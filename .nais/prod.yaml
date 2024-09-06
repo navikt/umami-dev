@@ -1,0 +1,48 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: reops-umami-beta
+  namespace: team-researchops
+  labels:
+    team: team-researchops
+spec:
+  image: {{ image }}
+  env:
+    - name: "DATABASE_TYPE"
+      value: "postgresql"
+  accessPolicy:
+    inbound:
+      rules:
+        - application: reops-felgen
+          namespace: team-researchops
+    outbound:
+      external:
+        - ipv4: 34.88.113.197
+        - ipv4: 34.88.58.127
+  gcp:
+    sqlInstances:
+      - type: POSTGRES_14
+        tier: db-f1-micro
+        databases:
+          - name: reops-umami-beta
+  ingresses:
+    - "https://umami.ansatt.nav.no"
+    - "https://umami.intern.nav.no"
+    - "https://umami.nav.no"
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "256Mi"
+    limits:
+      memory: "512Mi"
+  liveness:
+    path: "/login"
+    port: 3000
+  readiness:
+    path: "/login"
+    port: 3000
+  replicas:
+    cpuThresholdPercentage: 50
+    max: 2
+    min: 1
+  port: 3000

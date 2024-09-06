@@ -1,0 +1,14 @@
+{
+  "name": "reops-umami-beta",
+  "version": "1.0.0",
+  "description": "ResearchOps Umami Beta",
+  "scripts": {},
+  "keywords": [
+    "umami",
+    "analytics"
+  ],
+  "author": "Team ResearchOps",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
