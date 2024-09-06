@@ -1,5 +1,5 @@
-ResearchOps Umami Beta versjonen
-================================
+ResearchOps Umami Beta
+======================
 
 Umami er et åpent kildekode produkt-analyseverktøy som lar oss spore og analysere data på NAVs nettsider.
 
