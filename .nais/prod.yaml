@@ -10,6 +10,10 @@ spec:
   env:
     - name: "DATABASE_TYPE"
       value: "postgresql"
+    - name: "SKIP_DB_CHECK"
+      value: "1"
+    - name: "FORCE_SSL"
+      value: "1"
   accessPolicy:
     inbound:
       rules:
