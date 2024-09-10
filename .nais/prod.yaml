@@ -30,6 +30,7 @@ spec:
   ingresses:
     - "https://umami.ansatt.nav.no"
     - "https://umami.intern.nav.no"
+    - "https://umami.nav.no"
   resources:
     requests:
       cpu: "100m"
