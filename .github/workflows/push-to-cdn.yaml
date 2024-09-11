@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - "master"
+      - "main"
     paths:
       - "public/sporing/**"
 
@@ -19,12 +19,14 @@ jobs:
     steps:
       - uses: "actions/checkout@v4"
 
-      - id: upload
-        uses: navikt/frontend/actions/cdn-upload/v2@main
+      - name: Upload static files to CDN
+        uses: nais/deploy/actions/cdn-upload/v2@master
         with:
-          cdn-team-name: team-researchops
+          team: team-researchops
           source: ./public/sporing
           destination: "/sporing" # uploads folder to team root
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
       - run: echo uploaded file ${{ steps.upload.outputs.uploaded }}
         shell: bash
