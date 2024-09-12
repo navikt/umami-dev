@@ -12,6 +12,10 @@ spec:
       value: "postgresql"
     - name: "FORCE_SSL"
       value: "1"
+    - name: "ENABLE_TEST_CONSOLE"
+      value: "1"
+    - name: "LOG_QUERY"
+      value: "1"
   accessPolicy:
     inbound:
       rules:
