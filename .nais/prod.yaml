@@ -21,6 +21,8 @@ spec:
       rules:
         - application: reops-felgen
           namespace: team-researchops
+        - application: reops-proxy
+          namespace: team-researchops
     outbound:
       external:
         - ipv4: 34.88.113.197
