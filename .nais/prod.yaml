@@ -20,9 +20,8 @@ spec:
     inbound:
       rules:
         - application: reops-felgen
-          namespace: team-researchops
         - application: reops-proxy
-          namespace: team-researchops
+        - application: umami-proxy
     outbound:
       external:
         - ipv4: 34.88.113.197
@@ -39,10 +38,6 @@ spec:
             users:
               - name: datastream
         diskAutoresize: true
-  ingresses:
-    - "https://umami.ansatt.nav.no"
-    - "https://umami.intern.nav.no"
-    - "https://umami.nav.no/api/send"
   resources:
     requests:
       cpu: "100m"
