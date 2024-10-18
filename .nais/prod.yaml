@@ -38,6 +38,9 @@ spec:
             users:
               - name: datastream
         diskAutoresize: true
+  ingresses:
+    - "https://umami.ansatt.nav.no"
+    - "https://umami.intern.nav.no"
   resources:
     requests:
       cpu: "100m"
