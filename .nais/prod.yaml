@@ -12,20 +12,12 @@ spec:
       value: "postgresql"
     - name: "FORCE_SSL"
       value: "1"
-    - name: "ENABLE_TEST_CONSOLE"
-      value: "1"
-    - name: "LOG_QUERY"
-      value: "1"
   accessPolicy:
     inbound:
       rules:
         - application: reops-felgen
         - application: reops-proxy
         - application: umami-proxy
-    outbound:
-      external:
-        - ipv4: 34.88.113.197
-        - ipv4: 34.88.58.127
   gcp:
     sqlInstances:
       - type: POSTGRES_14
