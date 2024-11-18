@@ -12,6 +12,8 @@ spec:
       value: "postgresql"
     - name: "FORCE_SSL"
       value: "1"
+    - name: "DISABLE_TELEMETRY"
+      value: "1"
   accessPolicy:
     inbound:
       rules:
