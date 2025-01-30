@@ -15,10 +15,19 @@
 
         if (!l) return;
 
-        // Referrer check: Skip tracking if referrer starts with "/sites"
-        if (d.startsWith("/sites")) {
-            console.log("Skipping tracking due to excluded referrer:", d);
-            return;
+        // Referrer check: Parse the referrer URL and check its pathname
+        try {
+            const referrerUrl = new URL(d);
+            if (referrerUrl.pathname.startsWith('/sites')) {
+                console.log("Skipping tracking due to excluded referrer pathname:", referrerUrl.pathname);
+                return;
+            }
+        } catch (e) {
+            // If referrer is not a valid URL, check it directly
+            if (d.startsWith('/sites')) {
+                console.log("Skipping tracking due to excluded referrer:", d);
+                return;
+            }
         }
 
         const f = "data-",
