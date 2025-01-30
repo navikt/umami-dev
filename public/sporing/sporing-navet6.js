@@ -15,29 +15,6 @@
 
         if (!l) return;
 
-        // Helper function to check if path starts with /sites
-        const isSharePointPath = (path) => {
-            return path.startsWith('/sites') || path.includes('/sites/');
-        };
-
-        // Referrer check: Handle both relative and absolute URLs
-        if (d) {
-            try {
-                // Try parsing as absolute URL first
-                const referrerUrl = new URL(d, n.origin); // Use n.origin to handle relative URLs
-                if (isSharePointPath(referrerUrl.pathname)) {
-                    console.log("Skipping tracking - SharePoint path in referrer URL:", referrerUrl.pathname);
-                    return;
-                }
-            } catch (e) {
-                // If parsing fails, treat as relative path
-                if (isSharePointPath(d)) {
-                    console.log("Skipping tracking - SharePoint path in relative referrer:", d);
-                    return;
-                }
-            }
-        }
-
         const f = "data-",
             m = l.getAttribute.bind(l),
             h = m(f + "website-id"),
@@ -70,22 +47,42 @@
                 } catch (t) {}
                 return b ? t.split("?")[0] : t;
             },
-            j = () => ({
-                website: h,
-                hostname: s,
-                screen: N,
-                language: r,
-                title: O(q),
-                url: O(D),
-                referrer: O(_),
-                tag: g || void 0
-            }),
+            j = () => {
+                // Check referrer before building payload
+                if (d) {
+                    try {
+                        const referrerUrl = new URL(d, n.origin);
+                        if (referrerUrl.pathname.startsWith('/sites')) {
+                            console.log("Skipping tracking - Referrer starts with /sites:", referrerUrl.pathname);
+                            return null;
+                        }
+                    } catch (e) {
+                        if (d.startsWith('/sites')) {
+                            console.log("Skipping tracking - Relative referrer starts with /sites:", d);
+                            return null;
+                        }
+                    }
+                }
+
+                return {
+                    website: h,
+                    hostname: s,
+                    screen: N,
+                    language: r,
+                    title: O(q),
+                    url: O(D),
+                    referrer: O(_),
+                    tag: g || void 0
+                };
+            },
             k = (t, e, a) => {
                 a && (_ = D, D = U(a.toString()), D !== _ && setTimeout(I, x));
             },
             E = () => !h || i && i.getItem("umami.disabled") || v && !S.includes(s),
             L = async (t, e = "event") => {
                 if (E()) return;
+                // Don't send if payload is null (referrer check failed)
+                if (t === null) return;
                 const a = { "Content-Type": "application/json" };
                 void 0 !== R && (a["x-umami-cache"] = R);
                 try {
