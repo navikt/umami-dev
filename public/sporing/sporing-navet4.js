@@ -15,18 +15,26 @@
 
         if (!l) return;
 
-        // Referrer check: Parse the referrer URL and check its pathname
-        try {
-            const referrerUrl = new URL(d);
-            if (referrerUrl.pathname.startsWith('/sites')) {
-                console.log("Skipping tracking due to excluded referrer pathname:", referrerUrl.pathname);
-                return;
-            }
-        } catch (e) {
-            // If referrer is not a valid URL, check it directly
-            if (d.startsWith('/sites')) {
-                console.log("Skipping tracking due to excluded referrer:", d);
-                return;
+        // Helper function to check if path starts with /sites
+        const isSharePointPath = (path) => {
+            return path.startsWith('/sites') || path.includes('/sites/');
+        };
+
+        // Referrer check: Handle both relative and absolute URLs
+        if (d) {
+            try {
+                // Try parsing as absolute URL first
+                const referrerUrl = new URL(d);
+                if (isSharePointPath(referrerUrl.pathname)) {
+                    console.log("Skipping tracking - SharePoint path in referrer URL:", referrerUrl.pathname);
+                    return;
+                }
+            } catch (e) {
+                // If parsing fails, treat as relative path
+                if (isSharePointPath(d)) {
+                    console.log("Skipping tracking - SharePoint path in relative referrer:", d);
+                    return;
+                }
             }
         }
 
