@@ -24,7 +24,7 @@
         if (d) {
             try {
                 // Try parsing as absolute URL first
-                const referrerUrl = new URL(d);
+                const referrerUrl = new URL(d, n.origin); // Use n.origin to handle relative URLs
                 if (isSharePointPath(referrerUrl.pathname)) {
                     console.log("Skipping tracking - SharePoint path in referrer URL:", referrerUrl.pathname);
                     return;
