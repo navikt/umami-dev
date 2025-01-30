@@ -15,10 +15,10 @@
 
         if (!l) return;
 
-        // Referrer check: Only proceed if referrer is empty or starts with "https://"
-        if (d !== "" && !d.startsWith("https://")) {
-            console.log("Skipping tracking due to invalid referrer:", d);
-            return; // Don't proceed with tracking
+        // Referrer check: Skip tracking if referrer starts with "/sites"
+        if (d.startsWith("/sites")) {
+            console.log("Skipping tracking due to excluded referrer:", d);
+            return;
         }
 
         const f = "data-",
