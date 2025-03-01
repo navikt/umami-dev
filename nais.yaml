@@ -23,7 +23,7 @@ spec:
   gcp:
     sqlInstances:
       - type: POSTGRES_17
-        tier: db-g1-small
+        tier: db-custom-1-3840
         flags:
           - name: "cloudsql.enable_pgaudit"
             value: "on"
@@ -41,7 +41,7 @@ spec:
     - "https://umami.intern.nav.no"
   resources:
     requests:
-      cpu: "150m"
+      cpu: "200m"
       memory: "512Mi"
     limits:
       memory: "1024Mi"
