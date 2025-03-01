@@ -25,10 +25,6 @@ spec:
       - type: POSTGRES_17
         tier: db-custom-1-3840
         flags:
-          - name: "cloudsql.enable_pgaudit"
-            value: "on"
-          - name: "pgaudit.log"
-            value: "write"
           - name: cloudsql.logical_decoding
             value: "on"
         databases:
@@ -46,13 +42,13 @@ spec:
     limits:
       memory: "1024Mi"
   liveness:
-    path: "/"
+    path: "/login"
     port: 3000
   readiness:
-    path: "/"
+    path: "/login"
     port: 3000
   replicas:
     cpuThresholdPercentage: 50
-    max: 4
-    min: 2
+    max: 2
+    min: 1
   port: 3000
