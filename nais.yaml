@@ -46,10 +46,10 @@ spec:
     limits:
       memory: "1024Mi"
   liveness:
-    path: "/login"
+    path: "/"
     port: 3000
   readiness:
-    path: "/login"
+    path: "/"
     port: 3000
   replicas:
     cpuThresholdPercentage: 50
