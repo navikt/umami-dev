@@ -37,7 +37,7 @@ spec:
     - "https://umami.intern.nav.no"
   resources:
     requests:
-      cpu: "400m"
+      cpu: "800m"
       memory: "512Mi"
     limits:
       memory: "1024Mi"
@@ -49,6 +49,6 @@ spec:
     port: 3000
   replicas:
     cpuThresholdPercentage: 50
-    max: 2
-    min: 1
+    max: 6
+    min: 2
   port: 3000
