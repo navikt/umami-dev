@@ -23,7 +23,7 @@ spec:
   gcp:
     sqlInstances:
       - type: POSTGRES_17
-        tier: db-custom-32-30720
+        tier: db-custom-42-38912
         flags:
           - name: cloudsql.logical_decoding
             value: "on"
