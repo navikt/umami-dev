@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Enable Prisma debugging
-export DEBUG="prisma*"
+export DEBUG="prisma:*:info"
 
 # Set Prisma CLI cache directory to a writable location
 export PRISMA_CLI_CACHE_DIR="/tmp/.cache"
@@ -10,7 +10,7 @@ export PRISMA_CLI_CACHE_DIR="/tmp/.cache"
 mkdir -p $PRISMA_CLI_CACHE_DIR
 
 # Debug statement to print the password being used
-echo "Using password: $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_PASSWORD"
+# echo "Using password: $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_PASSWORD"
 
 # Export the client identity file
 openssl pkcs12 -password pass:$NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_PASSWORD -export -out /tmp/client-identity.p12 -inkey $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_SSLKEY -in $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_SSLCERT
@@ -22,7 +22,7 @@ openssl pkcs12 -in /tmp/client-identity.p12 -out /tmp/client-identity.pem -nodes
 openssl x509 -in /tmp/client-identity.pem -text -noout
 
 # Debug statement to print the SSL root certificate path
-echo "SSL Root Certificate Path: $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_SSLROOTCERT"
+# echo "SSL Root Certificate Path: $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_SSLROOTCERT"
 
 # Check the SSL connection to the database
 openssl s_client -connect $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_HOST:$NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_PORT -CAfile $NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_SSLROOTCERT
@@ -54,7 +54,7 @@ fi
 export DATABASE_URL="postgresql://$NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_USERNAME:$NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_PASSWORD@$NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_HOST:$NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_PORT/umami-one?sslidentity=/tmp/client-identity.p12&sslpassword=$NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_PASSWORD&sslcert=$NAIS_DATABASE_REOPS_UMAMI_BETA_REOPS_UMAMI_BETA_SSLROOTCERT" || echo "Failed to set DATABASE_URL" >> /tmp/run_error.log
 
 # Debug statement to print the DATABASE_URL
-echo "DATABASE_URL: $DATABASE_URL"
+# echo "DATABASE_URL: $DATABASE_URL"
 
 
 if [ $PRISMA_EXIT_CODE -ne 0 ]; then
