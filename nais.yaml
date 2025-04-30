@@ -7,6 +7,11 @@ metadata:
     team: team-researchops
 spec:
   image: {{ image }}
+  valkey:
+  - instance: sessions
+    access: readwrite
+  - instance: lookup
+    access: read
   env:
     - name: "DATABASE_TYPE"
       value: "postgresql"
