@@ -19,8 +19,12 @@ spec:
       value: "1"
     - name: "DISABLE_TELEMETRY"
       value: "1"
+    - name: "REMOVE_TRAILING_SLASH"
+      value: "1"
     - name: "LOG_QUERY"
       value: "0"
+    - name: "SKIP_DB_MIGRATION"
+      value: "1"
   accessPolicy:
     inbound:
       rules:
