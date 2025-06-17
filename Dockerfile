@@ -13,6 +13,7 @@ RUN mkdir -p $PRISMA_TMP_ENGINE_DIR && chmod -R 777 $PRISMA_TMP_ENGINE_DIR
 
 # Run Prisma generate during build
 ENV PRISMA_ENGINE_CACHE=$PRISMA_TMP_ENGINE_DIR
+ENV MIGRATION_ENGINE_LOCK_TIMEOUT=60000
 RUN npx prisma generate
 
 # Copy the run.sh script and set permissions
@@ -23,3 +24,4 @@ EXPOSE 3000
 
 # Run the run.sh script as root
 CMD ["/app/run.sh"]
+
