@@ -69,4 +69,3 @@ spec:
     max: 6
     min: 2
   port: 3000
-
