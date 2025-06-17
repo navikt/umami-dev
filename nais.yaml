@@ -29,6 +29,8 @@ spec:
       value: "1"
     - name: "MIGRATION_ENGINE_LOCK_TIMEOUT"
       value: "60000"
+    - name: "NEXT_TMP_DIR"
+      value: "/tmp/next"
   accessPolicy:
     inbound:
       rules:
@@ -67,3 +69,4 @@ spec:
     max: 6
     min: 2
   port: 3000
+
