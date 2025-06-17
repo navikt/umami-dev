@@ -11,8 +11,9 @@ WORKDIR /app
 ENV PRISMA_TMP_ENGINE_DIR=/tmp/prisma-engines
 RUN mkdir -p $PRISMA_TMP_ENGINE_DIR && chmod -R 777 $PRISMA_TMP_ENGINE_DIR
 
-# Run Prisma generate here (when FS is writable)
-RUN PRISMA_ENGINE_CACHE=$PRISMA_TMP_ENGINE_DIR npx prisma generate
+# Run Prisma generate during build
+ENV PRISMA_ENGINE_CACHE=$PRISMA_TMP_ENGINE_DIR
+RUN npx prisma generate
 
 # Copy the run.sh script and set permissions
 COPY run.sh /app/run.sh
