@@ -10,6 +10,8 @@ spec:
   valkey:
   - instance: sessions
     access: readwrite
+  - instance: reops-umami-beta
+    access: readwrite
   - instance: lookup
     access: read
   env:
