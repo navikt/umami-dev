@@ -1,4 +1,4 @@
-FROM ghcr.io/umami-software/umami:postgresql-latest
+FROM ghcr.io/umami-software/umami:postgresql-v2.17
 
 ENV TMPDIR=/tmp
 
