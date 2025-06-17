@@ -27,7 +27,7 @@ spec:
       value: "1"
     - name: "LOG_QUERY"
       value: "0"
-    - name: "SKIP_DB"
+    - name: "CHECK_DB"
       value: "1"
     - name: "MIGRATION_ENGINE_LOCK_TIMEOUT"
       value: "60000"
