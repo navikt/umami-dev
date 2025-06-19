@@ -1,7 +1,5 @@
 FROM ghcr.io/umami-software/umami:postgresql-latest
 
-ENV TMPDIR=/tmp
-
 USER root
 RUN apk update && apk add --no-cache bash openssl ca-certificates postgresql-client libc6-compat
 
@@ -9,10 +7,6 @@ WORKDIR /app
 
 # Set permissions for the entire /app directory and subdirectories
 RUN chmod -R 777 /app
-
-# Set writable directory for Prisma engines
-ENV PRISMA_TMP_ENGINE_DIR=/tmp/prisma-engines
-RUN mkdir -p $PRISMA_TMP_ENGINE_DIR && chmod -R 777 $PRISMA_TMP_ENGINE_DIR
 
 # Set writable directory for Next.js routes manifest
 ENV NEXT_TMP_DIR=/tmp/next
