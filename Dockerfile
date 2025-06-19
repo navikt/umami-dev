@@ -5,13 +5,6 @@ RUN apk update && apk add --no-cache bash openssl ca-certificates postgresql-cli
 
 WORKDIR /app
 
-# Set permissions for the entire /app directory and subdirectories
-RUN chmod -R 777 /app
-
-# Set writable directory for Next.js routes manifest
-ENV NEXT_TMP_DIR=/tmp/next
-RUN mkdir -p $NEXT_TMP_DIR && chmod -R 777 $NEXT_TMP_DIR
-
 # Copy the run.sh script and set permissions
 COPY run.sh /app/run.sh
 RUN chmod +x /app/run.sh
