@@ -18,11 +18,6 @@ RUN mkdir -p $NEXT_TMP_DIR && chmod -R 777 $NEXT_TMP_DIR
 # Ensure the /app/.next directory is writable
 RUN mkdir -p /app/.next && chmod -R 777 /app/.next
 
-# Run Prisma generate during build
-ENV PRISMA_ENGINE_CACHE=$PRISMA_TMP_ENGINE_DIR
-ENV MIGRATION_ENGINE_LOCK_TIMEOUT=60000
-RUN npx prisma generate
-
 # Copy the run.sh script and set permissions
 COPY run.sh /app/run.sh
 RUN chmod +x /app/run.sh
