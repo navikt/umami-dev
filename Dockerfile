@@ -16,6 +16,10 @@ RUN mkdir -p /app/node_modules/.pnpm/@prisma+engines@6.7.0/node_modules/@prisma/
     mkdir -p /app/node_modules/.prisma && \
     chmod -R 777 /app/node_modules/.prisma
 
+# Ensure Next.js directory has correct permissions
+RUN mkdir -p /app/.next && \
+    chmod -R 777 /app/.next
+
 # Copy the run.sh script and set permissions
 COPY run.sh /app/run.sh
 RUN chmod +x /app/run.sh
