@@ -5,7 +5,7 @@ Umami er et åpent kildekode produktanalyseverktøy som lar oss spore og analyse
 
 ---
 
-# Henvendelser
+# Henvendelser om Umami
 
 Du kan sende spørsmål på e-post til [researchops@nav.no](mailto:researchops@nav.no).
 
