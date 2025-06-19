@@ -1,8 +1,6 @@
 apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    nais.io/read-only-file-system: "false"
   name: reops-umami-beta
   namespace: team-researchops
   labels:
@@ -27,12 +25,6 @@ spec:
       value: "1"
     - name: "LOG_QUERY"
       value: "0"
-    - name: "CHECK_DB"
-      value: "1"
-    - name: "MIGRATION_ENGINE_LOCK_TIMEOUT"
-      value: "60000"
-    - name: "NEXT_TMP_DIR"
-      value: "/tmp/next"
   accessPolicy:
     inbound:
       rules:
