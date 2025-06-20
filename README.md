@@ -1,7 +1,7 @@
 Umami
 =====
 
-Umami er et åpent kildekode produktanalyseverktøy som brukes til å spore og analysere data på Navs nettsider / apper.
+Umami er et åpent kildekode produktanalyseverktøy som brukes til å spore og analysere data på Navs nettsider og apper.
 
 ---
 
