@@ -38,7 +38,7 @@ spec:
   gcp:
     sqlInstances:
       - type: POSTGRES_17
-        tier: db-custom-32-30720
+        tier: db-custom-24-22272
         flags:
           - name: cloudsql.logical_decoding
             value: "on"
@@ -54,8 +54,6 @@ spec:
     requests:
       cpu: "800m"
       memory: "512Mi"
-    limits:
-      memory: "1024Mi"
   liveness:
     path: "/login"
     port: 3000
@@ -64,6 +62,6 @@ spec:
     port: 3000
   replicas:
     cpuThresholdPercentage: 50
-    max: 6
+    max: 8
     min: 2
   port: 3000
