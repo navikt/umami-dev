@@ -41,3 +41,4 @@ jobs:
           CLUSTER: 'prod-gcp'
           RESOURCE: nais.yaml
           VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
+
