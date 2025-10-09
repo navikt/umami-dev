@@ -53,12 +53,12 @@ fi
 # Set the DATABASE_URL environment variable
 export DATABASE_URL="postgresql://$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_USERNAME:$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_PASSWORD@$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_HOST:$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_PORT/umami-one?sslidentity=/tmp/client-identity.p12&sslpassword=$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_PASSWORD&sslcert=$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_SSLROOTCERT" || echo "Failed to set DATABASE_URL" >> /tmp/run_error.log
 
-# Export REDIS_URL for the REDIS instance using the URI and credentials
-if [[ -n "$REDIS_USERNAME_UMAMI_DEVEL" && -n "$REDIS_PASSWORD_UMAMI_DEVEL" ]]; then
-  export REDIS_URL="$(echo $REDIS_URI_UMAMI_DEVEL | sed "s#://#://$REDIS_USERNAME_UMAMI_DEVEL:$REDIS_PASSWORD_UMAMI_DEVEL@#")"
-else
-  export REDIS_URL="$REDIS_URI_UMAMI_DEVEL"
-fi
+# # Export REDIS_URL for the REDIS instance using the URI and credentials
+# if [[ -n "$REDIS_USERNAME_UMAMI_DEVEL" && -n "$REDIS_PASSWORD_UMAMI_DEVEL" ]]; then
+#   export REDIS_URL="$(echo $REDIS_URI_UMAMI_DEVEL | sed "s#://#://$REDIS_USERNAME_UMAMI_DEVEL:$REDIS_PASSWORD_UMAMI_DEVEL@#")"
+# else
+#   export REDIS_URL="$REDIS_URI_UMAMI_DEVEL"
+# fi
 
 # Debug statement to print the DATABASE_URL
 # echo "DATABASE_URL: $DATABASE_URL"
