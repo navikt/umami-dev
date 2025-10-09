@@ -3,7 +3,7 @@ kind: Application
 metadata:
   annotations:
     nais.io/read-only-file-system: "false"
-  name: umami-dev
+  name: umami-devel
   namespace: team-researchops
   labels:
     team: team-researchops
@@ -12,7 +12,7 @@ spec:
   valkey:
   - instance: sessions
     access: readwrite
-  - instance: umami-dev
+  - instance: umami-devel
     access: readwrite
   - instance: lookup
     access: read
@@ -39,13 +39,13 @@ spec:
           - name: cloudsql.logical_decoding
             value: "on"
         databases:
-          - name: umami-dev
+          - name: umami-devel
             users:
               - name: datastream
         diskAutoresize: true
   ingresses:
-    - "https://umami-dev.ansatt.nav.no"
-    - "https://umami-dev.intern.nav.no"
+    - "https://umami-devel.ansatt.nav.no"
+    - "https://umami-devel.intern.nav.no"
   resources:
     requests:
       cpu: "500m"

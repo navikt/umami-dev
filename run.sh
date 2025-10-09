@@ -10,25 +10,25 @@ export PRISMA_CLI_CACHE_DIR="/tmp/.cache"
 mkdir -p $PRISMA_CLI_CACHE_DIR
 
 # Debug statement to print the password being used
-# echo "Using password: $NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_PASSWORD"
+# echo "Using password: $NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_PASSWORD"
 
 # Export the client identity file
-openssl pkcs12 -password pass:$NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_PASSWORD -export -out /tmp/client-identity.p12 -inkey $NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_SSLKEY -in $NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_SSLCERT
+openssl pkcs12 -password pass:$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_PASSWORD -export -out /tmp/client-identity.p12 -inkey $NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_SSLKEY -in $NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_SSLCERT
 
 # Convert the client identity file to PEM format
-openssl pkcs12 -in /tmp/client-identity.p12 -out /tmp/client-identity.pem -nodes -password pass:$NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_PASSWORD
+openssl pkcs12 -in /tmp/client-identity.p12 -out /tmp/client-identity.pem -nodes -password pass:$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_PASSWORD
 
 # Check the contents of the PEM file
 openssl x509 -in /tmp/client-identity.pem -text -noout
 
 # Debug statement to print the SSL root certificate path
-# echo "SSL Root Certificate Path: $NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_SSLROOTCERT"
+# echo "SSL Root Certificate Path: $NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_SSLROOTCERT"
 
 # Check the SSL connection to the database
-openssl s_client -connect $NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_HOST:$NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_PORT -CAfile $NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_SSLROOTCERT
+openssl s_client -connect $NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_HOST:$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_PORT -CAfile $NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_SSLROOTCERT
 
 # Verify the certificates
-openssl verify -CAfile $NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_SSLROOTCERT /tmp/client-identity.pem
+openssl verify -CAfile $NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_SSLROOTCERT /tmp/client-identity.pem
 VERIFY_EXIT_CODE=$?
 
 if [ $VERIFY_EXIT_CODE -eq 0 ]; then
@@ -41,8 +41,8 @@ else
 fi
 
 # Check if the root certificate file exists
-if [ ! -f "$NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_SSLROOTCERT" ]; then
-  echo "Root certificate file not found at $NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_SSLROOTCERT" >> /tmp/run_error.log
+if [ ! -f "$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_SSLROOTCERT" ]; then
+  echo "Root certificate file not found at $NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_SSLROOTCERT" >> /tmp/run_error.log
 fi
 
 # Check if the client identity file exists
@@ -51,13 +51,13 @@ if [ ! -f "/tmp/client-identity.p12" ]; then
 fi
 
 # Set the DATABASE_URL environment variable
-export DATABASE_URL="postgresql://$NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_USERNAME:$NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_PASSWORD@$NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_HOST:$NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_PORT/umami-one?sslidentity=/tmp/client-identity.p12&sslpassword=$NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_PASSWORD&sslcert=$NAIS_DATABASE_UMAMI_DEV_UMAMI_DEV_SSLROOTCERT" || echo "Failed to set DATABASE_URL" >> /tmp/run_error.log
+export DATABASE_URL="postgresql://$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_USERNAME:$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_PASSWORD@$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_HOST:$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_PORT/umami-one?sslidentity=/tmp/client-identity.p12&sslpassword=$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_PASSWORD&sslcert=$NAIS_DATABASE_UMAMI_DEVEL_UMAMI_DEVEL_SSLROOTCERT" || echo "Failed to set DATABASE_URL" >> /tmp/run_error.log
 
 # Export REDIS_URL for the REDIS instance using the URI and credentials
-if [[ -n "$REDIS_USERNAME_UMAMI_DEV" && -n "$REDIS_PASSWORD_UMAMI_DEV" ]]; then
-  export REDIS_URL="$(echo $REDIS_URI_UMAMI_DEV | sed "s#://#://$REDIS_USERNAME_UMAMI_DEV:$REDIS_PASSWORD_UMAMI_DEV@#")"
+if [[ -n "$REDIS_USERNAME_UMAMI_DEVEL" && -n "$REDIS_PASSWORD_UMAMI_DEVEL" ]]; then
+  export REDIS_URL="$(echo $REDIS_URI_UMAMI_DEVEL | sed "s#://#://$REDIS_USERNAME_UMAMI_DEVEL:$REDIS_PASSWORD_UMAMI_DEVEL@#")"
 else
-  export REDIS_URL="$REDIS_URI_UMAMI_DEV"
+  export REDIS_URL="$REDIS_URI_UMAMI_DEVEL"
 fi
 
 # Debug statement to print the DATABASE_URL
